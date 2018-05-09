@@ -27,10 +27,6 @@ import de.magiczerda.lwjgl_game_test.utils.Maths;
 
 public class Renderer {
 	
-	public static final float FOV = 70;
-	public static final float NEAR_PLANE = 0.1f;
-	public static final float FAR_PLANE = 1000;
-	
 	private Matrix4f projectionMatrix;
 	private StaticShader shader;
 	
@@ -102,16 +98,16 @@ public class Renderer {
 	private void createProjectionMatrix(){
         float aspectRatio = (float)(Options.DISPLAY_SIZE.x / Options.DISPLAY_SIZE.y);
 		//float aspectRatio = 1080 / 720;
-        float y_scale = (float) ((1f / Math.tan(Math.toRadians(FOV/2f))) * aspectRatio);
+        float y_scale = (float) ((1f / Math.tan(Math.toRadians(Options.FOV/2f))) * aspectRatio);
         float x_scale = y_scale / aspectRatio;
-        float frustum_length = FAR_PLANE - NEAR_PLANE;
+        float frustum_length = Options.FAR_PLANE - Options.NEAR_PLANE;
         
         projectionMatrix = new Matrix4f();
         projectionMatrix.m00(x_scale);// = x_scale;
         projectionMatrix.m11(y_scale);// = y_scale;
-        projectionMatrix.m22(-((FAR_PLANE + NEAR_PLANE) / frustum_length));
+        projectionMatrix.m22(-((Options.FAR_PLANE + Options.NEAR_PLANE) / frustum_length));
         projectionMatrix.m23(-1);// = -1;
-        projectionMatrix.m32(-((2 * NEAR_PLANE * FAR_PLANE) / frustum_length));
+        projectionMatrix.m32(-((2 * Options.NEAR_PLANE * Options.FAR_PLANE) / frustum_length));
         projectionMatrix.m33(0);// = 0;
 	}
 }

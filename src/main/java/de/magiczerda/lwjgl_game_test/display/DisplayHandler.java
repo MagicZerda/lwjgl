@@ -3,7 +3,6 @@ package de.magiczerda.lwjgl_game_test.display;
 import java.nio.IntBuffer;
 
 import org.lwjgl.glfw.GLFW;
-import org.lwjgl.glfw.GLFWCursorPosCallbackI;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWKeyCallbackI;
 import org.lwjgl.glfw.GLFWVidMode;
@@ -45,18 +44,13 @@ public class DisplayHandler {
 		
 		Input input = new Input(camera);
 		
+		GLFW.glfwSetCursorPos(window, Options.DISPLAY_SIZE.x / 2, Options.DISPLAY_SIZE.y / 2);	//place the cursor in the center of the window
+		GLFW.glfwSetInputMode(window, GLFW.GLFW_CURSOR, GLFW.GLFW_CURSOR_DISABLED);
+		
 		//setup key callback- this will involke the controlls
 		GLFW.glfwSetKeyCallback(window, new GLFWKeyCallbackI() {
 			public void invoke(long window, int key, int scancode, int action, int mods) {
 				input.keyInput(window, key, action);	//process all inputs in the Input.keyInput method
-			}
-		});
-		
-		GLFW.glfwSetCursorPosCallback(window, new GLFWCursorPosCallbackI() {
-			
-			@Override
-			public void invoke(long window, double xpos, double ypos) {
-				input.mousePos(xpos, ypos);
 			}
 		});
 		

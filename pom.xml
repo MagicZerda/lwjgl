@@ -4,7 +4,7 @@
 
   <groupId>de.magiczerda</groupId>
   <artifactId>lwjgl-game-test</artifactId>
-  <version>0.01</version>
+  <version>0.02</version>
   <packaging>jar</packaging>
 
   <name>lwjgl-game-test</name>

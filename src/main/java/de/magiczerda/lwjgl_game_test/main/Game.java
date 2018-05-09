@@ -83,6 +83,9 @@ public class Game {
 	
 	private void update() {
 		camera.move();
+		input.updateMouse(display.window);
+		
+		if(camera.getYaw() > 361) camera.setYaw(360);	//<--- Weird (position+-)
 		
 		renderer.processEntity(entity);
 		
