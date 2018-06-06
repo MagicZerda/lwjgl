@@ -8,9 +8,9 @@ import de.magiczerda.lwjgl_game_test.options.Options;
 public class Camera {
 	
 	private Vector3f position = new Vector3f(0, 0, 0);	//initial camera position
-	private float pitch;
-	private float yaw;
-	private float roll;
+	public static float pitch;
+	public static float yaw;
+	public static float roll;
 	
 	private boolean moveForward = false;
 	private boolean moveRight = false;
@@ -21,12 +21,6 @@ public class Camera {
 	
 	public void move() {
 		Vector3f dPosition = new Vector3f();
-		
-		if(pitch >= 360 || pitch <= -360) this.pitch = 0;
-		if(yaw >= 360 || yaw <= -360) this.yaw = 0;
-		if(pitch >= 110) this.pitch = 110;
-		if(pitch <= -100) this.pitch = -100;
-		
 		
 		/*
 		 * I'd like to thank my maths teacher Mrs. Eckstein for helping me out with this :)
@@ -81,13 +75,13 @@ public class Camera {
 	 */
 	
 	public void changeCameraView(Vector2f pitchYaw) {
-		this.yaw += pitchYaw.x;
-		this.pitch += pitchYaw.y;
+		yaw += pitchYaw.x;
+		pitch += pitchYaw.y;
 	}
 	
-	public void addToYaw(float d) { this.yaw += d; }
-	public void addToPitch(float d) { this.pitch += d; }
-	public void addToRoll(float d) { this.roll += d; }
+	public void addToYaw(float d) { yaw += d; }
+	public void addToPitch(float d) { pitch += d; }
+	public void addToRoll(float d) { roll += d; }
 
 	public Vector3f getPosition() {
 		return position;
@@ -96,14 +90,14 @@ public class Camera {
 	}public float getPitch() {
 		return pitch;
 	}public void setPitch(float pitch) {
-		this.pitch = pitch;
+		Camera.pitch = pitch;
 	}public float getYaw() {
 		return yaw;
 	}public void setYaw(float yaw) {
-		this.yaw = yaw;
+		Camera.yaw = yaw;
 	}public float getRoll() {
 		return roll;
 	}public void setRoll(float roll) {
-		this.roll = roll;
+		Camera.roll = roll;
 	}
 }

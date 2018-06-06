@@ -3,6 +3,7 @@ package de.magiczerda.lwjgl_game_test.main;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 
+import de.magiczerda.lwjgl_game_test.controls.AngleHandler;
 import de.magiczerda.lwjgl_game_test.controls.Input;
 import de.magiczerda.lwjgl_game_test.display.DisplayHandler;
 import de.magiczerda.lwjgl_game_test.entities.Camera;
@@ -25,6 +26,7 @@ public class Game {
 	ModelTexture texture;
 	Camera camera;
 	Input input;
+	Thread controlThread;
 	//---------------------------------
 	
 	//test data
@@ -50,6 +52,7 @@ public class Game {
 		texture = new ModelTexture(loader.loadTexture("test/grey"));
 		input = new Input(camera);
 		light = new Light(new Vector3f(-1, 4, -1), new Vector3f(0.25f, 0.75f, 1));
+		AngleHandler angleHandler = new AngleHandler(display);
 		//--------------------------------------
 		
 		model = OBJParser.loadOBJModel("test/dragon", loader);
@@ -57,7 +60,16 @@ public class Game {
 		entity = new Entity(texturedModel, new Vector3f(0, 0, -5f), 0, 0, 0, 1f);
 		renderer = new MasterRenderer();
 		
+		controlThread = new Thread(angleHandler);
+		controlThread.start();
+		
 		gameLoop();
+		
+		try {
+			controlThread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		closeGame();
 	}
 	
@@ -83,6 +95,7 @@ public class Game {
 	
 	private void update() {
 		camera.move();
+		
 		input.updateMouse(display.window);
 		
 		if(camera.getYaw() > 361) camera.setYaw(360);	//<--- Weird (position+-)

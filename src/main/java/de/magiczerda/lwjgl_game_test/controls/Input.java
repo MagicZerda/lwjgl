@@ -55,7 +55,7 @@ public class Input {
 	}
 	
 	public void updateMouse(long window) {
-		camera.changeCameraView(getMouseDelta(window));
+		camera.changeCameraView((getMouseDelta(window).mul(10)));
 	}
 	
 	private Vector2f getMouseDelta(long window) {

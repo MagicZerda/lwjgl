@@ -30,7 +30,7 @@ public class Renderer {
 	private Matrix4f projectionMatrix;
 	private StaticShader shader;
 	
-	public Vector4f clearColor = new Vector4f(0.5f, 1.0f, 0.0f, 0.0f);
+	public Vector4f clearColor = new Vector4f(0.5f, 0.7f, 1.0f, 0.0f);
 	
 	public Renderer(StaticShader shader) {
 		this.shader = shader;
